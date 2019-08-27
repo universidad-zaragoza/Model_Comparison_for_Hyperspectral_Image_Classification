@@ -1,0 +1,7 @@
+#!/bin/bash
+
+nohup ./hyperspectral_models.py -d CNN -o output.txt -i indexes/ -e 60000 -m 1 >CNN_output.txt 2>&1 &
+nohup ./hyperspectral_models.py -d GBDT -o output.txt -i indexes/ -m 3 >GBDT_output.txt 2>&1 &
+nohup ./hyperspectral_models.py -d SVM -o output.txt -i indexes/ -m 4 >SVM_output.txt 2>&1 &
+nohup ./hyperspectral_models.py -d RF -o output.txt -i indexes/ -m 6 >RF_output.txt 2>&1 &
+
