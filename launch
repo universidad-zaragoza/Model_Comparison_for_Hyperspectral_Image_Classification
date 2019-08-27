@@ -1,7 +1,14 @@
 #!/bin/bash
 
-nohup ./hyperspectral_models.py -d model_CNN -o output.txt -i indexes/ -e 60000 -m 1 >output_CNN.txt 2>&1 &
-nohup ./hyperspectral_models.py -d model_GBDT -o output.txt -i indexes/ -m 3 >output_GBDT.txt 2>&1 &
-nohup ./hyperspectral_models.py -d model_SVM -o output.txt -i indexes/ -m 4 >output_SVM.txt 2>&1 &
-nohup ./hyperspectral_models.py -d model_RF -o output.txt -i indexes/ -m 6 >output_RF.txt 2>&1 &
+# To launch each model uncomment it
+./hyperspectral_models.py -d model_SVM -o output.txt -i indexes/ -m 4
+#./hyperspectral_models.py -d model_RF -o output.txt -i indexes/ -m 6
+#./hyperspectral_models.py -d model_GBDT -o output.txt -i indexes/ -m 3
+#./hyperspectral_models.py -d model_CNN -o output.txt -i indexes/ -e 60000 -m 1
+
+# To launch in back ground and close terminal (for example, via ssh)
+#nohup ./hyperspectral_models.py -d model_CNN -o output.txt -i indexes/ -e 60000 -m 1 >output_CNN.txt 2>&1 &
+#nohup ./hyperspectral_models.py -d model_GBDT -o output.txt -i indexes/ -m 3 >output_GBDT.txt 2>&1 &
+#nohup ./hyperspectral_models.py -d model_SVM -o output.txt -i indexes/ -m 4 >output_SVM.txt 2>&1 &
+#nohup ./hyperspectral_models.py -d model_RF -o output.txt -i indexes/ -m 6 >output_RF.txt 2>&1 &
 
