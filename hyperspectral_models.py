@@ -331,6 +331,22 @@ def model_3_parameters(num_features, num_classes, image_info):
     
     return parameters
 
+def model_4_parameters(num_features, num_classes, image_info):
+    """Prepare the model training parameters.
+    
+    SVM model.
+    
+    """
+    parameters = {}
+    parameters['num_features'] = num_features
+    parameters['num_classes'] = num_classes
+    if image_info['key'][:5] == "pavia":
+        parameters['C'] = 1.0
+    else:
+        parameters['C'] = 40.0
+    
+    return parameters
+
 def model_parameters(num_features, num_classes, image_info):
     """Prepare the model training parameters.
     
@@ -343,8 +359,10 @@ def model_parameters(num_features, num_classes, image_info):
         return model_3_parameters(num_features, num_classes, image_info)
     elif MODEL == 1:
         return model_1_parameters(num_features, num_classes, image_info)
+    elif MODEL == 4:
+        return model_4_parameters(num_features, num_classes, image_info)
     else:
-        # For models 2, 4 and 5
+        # For models 2, and 5
         return model_2_parameters(num_features, num_classes)
 
 # Model generation functions
@@ -521,10 +539,10 @@ def get_model_3(parameters):
     """
     # Generate model
     model = lgb.LGBMClassifier(
-                    objective = 'multiclass',
-                    class_weight = 'balanced',
-                    n_estimators = parameters['n_estimators'],
-                    min_child_samples = parameters['min_child_samples'])
+                    objective='multiclass',
+                    class_weight='balanced',
+                    n_estimators=parameters['n_estimators'],
+                    min_child_samples=parameters['min_child_samples'])
     
     # Return the model
     return model
@@ -537,8 +555,8 @@ def get_cv_model_3(parameters):
     
     """
     # Generate model
-    model = lgb.LGBMClassifier(objective = 'multiclass',
-                               class_weight = 'balanced')
+    model = lgb.LGBMClassifier(objective='multiclass',
+                               class_weight='balanced')
     
     # Cross validation parameters
     param_grid = {
@@ -559,7 +577,7 @@ def get_model_4(parameters):
     
     """
     # Generate model
-    model = svm.SVC(C=40.0, gamma='scale', probability=True,
+    model = svm.SVC(C=parameters['C'], gamma='scale', probability=True,
                     class_weight='balanced',
                     decision_function_shape='ovr')
     
