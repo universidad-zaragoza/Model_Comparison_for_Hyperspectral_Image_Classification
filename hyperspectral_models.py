@@ -185,6 +185,7 @@ def use_args(args):
         
     """
     global DATA_PATH
+    global IMAGES_FILE
     global WORKING_DIR
     global OUTPUT_DIR
     global OUTPUT_FILE_NAME
@@ -207,6 +208,7 @@ def use_args(args):
     if args.data_path:
         # Change the default path of the images
         DATA_PATH = args.data_path
+        IMAGES_FILE = os.path.join(DATA_PATH, IMAGES_FILE_NAME)
     
     if args.working_dir:
         # Change the default path of the working directory
